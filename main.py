@@ -32,6 +32,7 @@ def execute(code_line: str) -> None:
 
 if __name__ == '__main__':
     print("Вас приветствует консоль! Удивительно, не правда ли? Вводите команды.")
+    # Бесконечно просим пользователя вводить команды и исполняем их
     while True:
         command = input(">>> ")
         execute(command)
