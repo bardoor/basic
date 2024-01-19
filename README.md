@@ -48,8 +48,11 @@ a == b
 
 Условный оператор:
 ```
-if some_number > other_number:
-  print 10
+if some_number > other_number then print 10
 ```
 
+Цикл:
+```
+repeat 5 times print some_number
+```
 
