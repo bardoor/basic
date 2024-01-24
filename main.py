@@ -34,7 +34,13 @@ def execute(code_line: str) -> None:
         # Обращаемся к глобальному словарю переменных, 
         # записываем по имени переменной соответствующее значение
         variables[variable_name] = value
-    
+    elif instruction["operation"] == "add":
+        # Достаём из массива имя переменной и значение слагаемого
+        variable_name = instruction["variable_name"]
+        # Просим у пользователя число >>>
+        addend = instruction["addend"]
+        # Операция сложения >>> 
+        variables[variable_name] = int(variables[variable_name]) + int(addend)
 
 
 
