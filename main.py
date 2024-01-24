@@ -12,11 +12,19 @@ def get_instruction(code_line: str) -> dict:
         variable_name = components[0]
         value = components[2]
         instruction = {"operation": "assign", "variable_name": variable_name, "value": value}
+<<<<<<< HEAD
     elif code_line[0:3] == "div":
         components = code_line.split(" ")
         variable_name = components[1]
         podelit_na = components[2]
         instruction = {"operation": "div", "variable_name": variable_name, "podelit_na": podelit_na}
+=======
+    elif code_line[0:3] == "mul":
+        components = code_line.split(" ")
+        variable_name = components[1]
+        multi = components[2]
+        instruction = {"operation": "mul", "variable_name": variable_name, "multi": multi}
+>>>>>>> Умножение
 
     return instruction
 
@@ -33,6 +41,10 @@ def execute(code_line: str) -> None:
         # Обращаемся к глобальному словарю переменных, 
         # записываем по имени переменной соответствующее значение
         variables[variable_name] = value
+    elif instruction["operation"] == "mul":
+        variable_name = instruction["variable_name"]
+        mul = instruction["multi"]
+        variables[variable_name] = int(variables[variable_name]) * int(mul)
 
     elif instruction["operation"] == "div":
         variable_name = instruction["variable_name"]
