@@ -32,7 +32,10 @@ def get_instruction(code_line: str) -> dict:
         variable_name = components[1]
         multi = components[2]
         instruction = {"operation": "mul", "variable_name": variable_name, "multi": multi}
-
+    elif code_line[0:5] == "print":
+        components = code_line.split(" ")
+        variable_name = components[1]
+        instruction = {"operation": "print", "variable_name": variable_name}
     return instruction
 
 
@@ -67,6 +70,12 @@ def execute(code_line: str) -> None:
         variable_name = instruction["variable_name"]
         minus = instruction["minus"]
         variables[variable_name] = int(variables[variable_name]) - int(minus)
+    elif instruction["operation"] == "print":
+        variable_name = instruction["variable_name"]
+        if variable_name in variables:
+            print(variables[variable_name])
+        else:
+            print(variable_name)
 
 if __name__ == '__main__':
     print("Вас приветствует консоль! Удивительно, не правда ли? Вводите команды.")
