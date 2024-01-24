@@ -10,8 +10,13 @@ def get_instruction(code_line: str) -> dict:
         # Затем извлекаем из неё имя переменной и значение
         components = code_line.split(" ")
         variable_name = components[0]
-        value = components[2]
+        value = int(components[2])
         instruction = {"operation": "assign", "variable_name": variable_name, "value": value}
+    elif code_line[0:3] == "sub":
+        components = code_line.split(" ")
+        variable_name = components[1]
+        minus = components[2]
+        instruction = {"operation": "sub", "variable_name": variable_name, "minus": minus}
 
     return instruction
 
@@ -28,7 +33,10 @@ def execute(code_line: str) -> None:
         # Обращаемся к глобальному словарю переменных, 
         # записываем по имени переменной соответствующее значение
         variables[variable_name] = value
-
+    elif instruction["operation"] == "sub":
+        variable_name = instruction["variable_name"]
+        minus = instruction["minus"]
+        variables[variable_name] = int(variables[variable_name]) - int(minus)
 
 if __name__ == '__main__':
     print("Вас приветствует консоль! Удивительно, не правда ли? Вводите команды.")
