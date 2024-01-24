@@ -34,6 +34,11 @@ def execute(code_line: str) -> None:
         # записываем по имени переменной соответствующее значение
         variables[variable_name] = value
 
+    elif instruction["operation"] == "div":
+        variable_name = instruction["variable_name"]
+        podelit_na = instruction["podelit_na"]
+        variables[variable_name] = int(variables[variable_name]) // int(podelit_na)
+
 
 if __name__ == '__main__':
     print("Вас приветствует консоль! Удивительно, не правда ли? Вводите команды.")
