@@ -1,5 +1,8 @@
 variables = {}
 
+# input a
+# add a 10
+# print a
 
 def get_instruction(code_line: str) -> dict:
     instruction = {}
@@ -12,6 +15,15 @@ def get_instruction(code_line: str) -> dict:
         variable_name = components[0]
         value = int(components[2])
         instruction = {"operation": "assign", "variable_name": variable_name, "value": value}
+
+
+
+    elif "input" in code_line:
+        components = code_line.split(" ")
+        variable_name = components[1]
+        instruction = {"operation": "input","variable_name": variable_name}
+
+
     elif code_line[0:3] == "div":
         components = code_line.split(" ")
         variable_name = components[1]
@@ -48,6 +60,12 @@ def execute(code_line: str) -> None:
         # Обращаемся к глобальному словарю переменных, 
         # записываем по имени переменной соответствующее значение
         variables[variable_name] = value
+
+    elif instruction["operation"] == "input":
+        variable_name = instruction["variable_name"]
+        variables[variable_name] = int(input("Введите целое число>>"))
+
+
     elif instruction["operation"] == "mul":
         variable_name = instruction["variable_name"]
         mul = instruction["multi"]
