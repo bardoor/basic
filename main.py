@@ -22,6 +22,12 @@ def get_instruction(code_line: str) -> dict:
         variable_name = components[1]
         minus = components[2]
         instruction = {"operation": "sub", "variable_name": variable_name, "minus": minus}
+    elif code_line[0:3] == "add":
+        components = code_line.split(" ")
+        variable_name = components[1]
+        addend = components[2]
+        instruction = {"operation": "add", "variable_name": variable_name, "addend": addend}
+
 
     return instruction
 
@@ -42,6 +48,14 @@ def execute(code_line: str) -> None:
         variable_name = instruction["variable_name"]
         podelit_na = instruction["podelit_na"]
         variables[variable_name] = int(variables[variable_name]) // int(podelit_na)
+    elif instruction["operation"] == "add":
+        # Достаём из массива имя переменной и значение слагаемого
+        variable_name = instruction["variable_name"]
+        # Просим у пользователя число >>>
+        addend = instruction["addend"]
+        # Операция сложения >>> 
+        variables[variable_name] = int(variables[variable_name]) + int(addend)
+
 
     elif instruction["operation"] == "sub":
         variable_name = instruction["variable_name"]
