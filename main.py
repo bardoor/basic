@@ -15,6 +15,19 @@ def get_instruction(code_line: str) -> dict:
         variable_name = components[0]
         value = int(components[2])
         instruction = {"operation": "assign", "variable_name": variable_name, "value": value}
+    elif 'if' in code_line: 
+        components = code_line.split(" ")
+        condition = components[1] + components[2] + components[3]
+        successful = get_instruction(condition)['result']
+        
+        if successful == True:
+            then_instruction = ""
+            for i in range(5, len(components)):
+                then_instruction += components[i]
+        
+        instruction = {'operation': 'if', 'successful': successful,'then_instruction': get_instruction(then_instruction)}
+
+        
 
 
 
@@ -49,7 +62,6 @@ def get_instruction(code_line: str) -> dict:
         variable_name = components[1]
         instruction = {"operation": "print", "variable_name": variable_name}
     return instruction
-
 
 def execute(code_line: str) -> None:
     instruction = get_instruction(code_line)
